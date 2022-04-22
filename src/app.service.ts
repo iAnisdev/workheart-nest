@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { helloType } from './types/basic'
+import { healthType } from './types/basic'
 @Injectable()
 export class AppService {
-  getHealth(): helloType {
+  getHealth(): healthType {
     return {status: 1, msg: 'Service is working fine'};
   }
 }

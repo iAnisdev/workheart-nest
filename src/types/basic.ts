@@ -1,4 +1,4 @@
-export type helloType =  {
+export type healthType =  {
     status: number
     msg: string
 }
