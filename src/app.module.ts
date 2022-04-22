@@ -5,15 +5,12 @@ require('dotenv').config()
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ClientsController } from './clients/clients.controller';
-import { ClientsService } from './clients/clients.service';
-import { ProjectsController } from './projects/projects.controller';
-import { ProjectsService } from './projects/projects.service';
-import { TasksController } from './tasks/tasks.controller';
-import { TasksService } from './tasks/tasks.service';
 import { Client } from './entity/clients'
 import { Project } from './entity/projects'
 import { Task } from './entity/task'
+import { ClientsModule } from './clients/clients.module';
+import { ProjectsModule } from './projects/projects.module';
+import { TasksModule } from './tasks/tasks.module';
 
 @Module({
   imports: [
@@ -26,9 +23,12 @@ import { Task } from './entity/task'
       database: process.env.DB_DATABASE,
       entities: [Client ,  Project , Task],
       synchronize: true,
-    })
+    }),
+    ClientsModule,
+    ProjectsModule,
+    TasksModule
   ],
-  controllers: [AppController, ClientsController, ProjectsController, TasksController],
-  providers: [AppService, ClientsService, ProjectsService, TasksService],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}

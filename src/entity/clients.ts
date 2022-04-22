@@ -1,6 +1,7 @@
-import { Entity , Column ,CreateDateColumn , UpdateDateColumn, PrimaryGeneratedColumn } from 'typeorm'
+import { Entity , Column ,CreateDateColumn , UpdateDateColumn, PrimaryGeneratedColumn , Exclusion} from 'typeorm'
 
 @Entity()
+@Exclusion('password')
 export class Client {
     @PrimaryGeneratedColumn()
     id: number;
@@ -16,6 +17,8 @@ export class Client {
     })
     email: string;
 
+    @Column()
+    password: string
 
     @Column("varchar", { length: 200 })
     description: string;
