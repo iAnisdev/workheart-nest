@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpStatus } from '@nestjs/common';
 import { ClientsService } from './clients.service';
 import { CreateClientDto } from './dto/create-client.dto';
 import { UpdateClientDto } from './dto/update-client.dto';
@@ -6,31 +6,48 @@ import { updateClientPasswordDto } from './dto/update-client-password.dto';
 
 @Controller('clients')
 export class ClientsController {
-  constructor(private readonly clientsService: ClientsService) {}
+  constructor(private readonly clientsService: ClientsService) {
+    console.log(this.clientsService)
+  }
 
   @Post()
-  create(@Body() createClientDto: CreateClientDto) {
-    return this.clientsService.create(createClientDto);
+  async create(@Body() data: CreateClientDto) {
+    let client = await this.clientsService.create(data);
+    return {
+      statusCode: HttpStatus.OK,
+      message: 'Client created successfully',
+      client
+    };
   }
 
   @Get()
-  findAll() {
-    return this.clientsService.findAll();
+  async findAll() {
+    let clients = await this.clientsService.findAll();
+    return {
+      statusCode: HttpStatus.OK,
+      message: 'Clients fetched successfully',
+      clients
+    };
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.clientsService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    let client = await this.clientsService.findOne(+id);
+    return {
+      statusCode: HttpStatus.OK,
+      message: 'Client fetched successfully',
+      client
+    };
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateClientDto: UpdateClientDto) {
-    return this.clientsService.update(+id, updateClientDto);
+  update(@Param('id') id: string, @Body() data: UpdateClientDto) {
+    return this.clientsService.update(+id, data);
   }
 
   @Patch(':id/password')
-  updatePassword(@Param('id') id: string, @Body() updateClientPasswordDto: updateClientPasswordDto) {
-    return this.clientsService.updatePassword(+id, updateClientPasswordDto);
+  updatePassword(@Param('id') id: string, @Body() data: updateClientPasswordDto) {
+    return this.clientsService.updatePassword(+id, data);
   }
 
   @Delete(':id')

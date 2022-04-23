@@ -1,6 +1,6 @@
-import { Entity , Column ,CreateDateColumn , UpdateDateColumn, PrimaryGeneratedColumn , Exclusion} from 'typeorm'
+import { Entity , Column ,CreateDateColumn , UpdateDateColumn, PrimaryGeneratedColumn , Exclusion , BeforeInsert} from 'typeorm'
 
-@Entity()
+@Entity('Clients')
 @Exclusion('password')
 export class Client {
     @PrimaryGeneratedColumn()
@@ -17,6 +17,10 @@ export class Client {
     })
     email: string;
 
+    @BeforeInsert()
+    hashPassword() {
+        return this.password
+    }
     @Column()
     password: string
 

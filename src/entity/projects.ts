@@ -9,7 +9,7 @@ enum ProjectStatus {
     TERMINATED = "Terminated",
 }
 
-@Entity()
+@Entity('Projects')
 export class Project {
     @PrimaryGeneratedColumn()
     id: number;
