@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm'
+import { TypeOrmModule } from '@nestjs/typeorm';
 
-require('dotenv').config()
+require('dotenv').config();
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { Client } from './entity/clients'
-import { Project } from './entity/projects'
-import { Task } from './entity/tasks'
+import { Client } from './entity/clients';
+import { Project } from './entity/projects';
+import { Task } from './entity/tasks';
 import { ClientsModule } from './clients/clients.module';
 import { ProjectsModule } from './projects/projects.module';
 import { TasksModule } from './tasks/tasks.module';
@@ -26,9 +26,9 @@ import { TasksModule } from './tasks/tasks.module';
     }),
     ClientsModule,
     ProjectsModule,
-    TasksModule
+    TasksModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}

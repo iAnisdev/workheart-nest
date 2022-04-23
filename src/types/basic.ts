@@ -1,4 +1,4 @@
-export type healthType =  {
-    status: number
-    msg: string
-}
+export type healthType = {
+  status: number;
+  msg: string;
+};

@@ -1,4 +1,4 @@
 export class updateClientPasswordDto {
-    password: string
-    cpassword: string
+  password: string;
+  cpassword: string;
 }

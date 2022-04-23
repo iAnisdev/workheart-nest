@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpStatus } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  HttpStatus,
+} from '@nestjs/common';
 import { ClientsService } from './clients.service';
 import { CreateClientDto } from './dto/create-client.dto';
 import { UpdateClientDto } from './dto/update-client.dto';
@@ -6,9 +15,7 @@ import { updateClientPasswordDto } from './dto/update-client-password.dto';
 
 @Controller('clients')
 export class ClientsController {
-  constructor(private readonly clientsService: ClientsService) {
-    console.log(this.clientsService)
-  }
+  constructor(private readonly clientsService: ClientsService) {}
 
   @Post()
   async create(@Body() data: CreateClientDto) {
@@ -16,7 +23,7 @@ export class ClientsController {
     return {
       statusCode: HttpStatus.OK,
       message: 'Client created successfully',
-      client
+      client,
     };
   }
 
@@ -26,7 +33,7 @@ export class ClientsController {
     return {
       statusCode: HttpStatus.OK,
       message: 'Clients fetched successfully',
-      clients
+      clients,
     };
   }
 
@@ -36,7 +43,7 @@ export class ClientsController {
     return {
       statusCode: HttpStatus.OK,
       message: 'Client fetched successfully',
-      client
+      client,
     };
   }
 
@@ -46,7 +53,10 @@ export class ClientsController {
   }
 
   @Patch(':id/password')
-  updatePassword(@Param('id') id: string, @Body() data: updateClientPasswordDto) {
+  updatePassword(
+    @Param('id') id: string,
+    @Body() data: updateClientPasswordDto,
+  ) {
     return this.clientsService.updatePassword(+id, data);
   }
 
