@@ -1,4 +1,9 @@
-import { Module } from '@nestjs/common';
+import {
+  MiddlewareConsumer,
+  Module,
+  NestModule,
+  RequestMethod,
+} from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 require('dotenv').config();
@@ -12,6 +17,8 @@ import { ClientsModule } from './resources/clients/clients.module';
 import { ProjectsModule } from './resources/projects/projects.module';
 import { TasksModule } from './resources/tasks/tasks.module';
 import { AuthModule } from './resources/auth/auth.module';
+import { IsloggedinMiddleware } from './middlewares/isloggedin/isloggedin.middleware';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -29,8 +36,16 @@ import { AuthModule } from './resources/auth/auth.module';
     ProjectsModule,
     TasksModule,
     AuthModule,
+    JwtModule.register({ secret: process.env.jwt_key }),
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(IsloggedinMiddleware)
+      .exclude({ path: '/auth/login', method: RequestMethod.POST })
+      .forRoutes('*');
+  }
+}

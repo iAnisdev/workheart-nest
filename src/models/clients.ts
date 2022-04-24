@@ -4,8 +4,6 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   PrimaryGeneratedColumn,
-  BeforeInsert,
-  BeforeUpdate,
 } from 'typeorm';
 
 @Entity('Clients')
@@ -24,7 +22,7 @@ export class Client {
   })
   email: string;
 
-  @Column({ select: false })
+  @Column()
   password: string;
 
   @Column('varchar', { length: 200 })
