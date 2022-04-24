@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { healthType } from './types/basic';
+
 @Injectable()
 export class AppService {
   getHealth(): healthType {

@@ -31,7 +31,6 @@ export class AuthService {
           access_token,
         };
       } else {
-        console.log('returning error');
         return {
           statusCode: HttpStatus.UNAUTHORIZED,
           message: 'Invalid Password',
