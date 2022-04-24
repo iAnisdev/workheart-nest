@@ -6,7 +6,7 @@ import { UpdateClientDto } from './dto/update-client.dto';
 import { updateClientPasswordDto } from './dto/update-client-password.dto';
 import * as bcrypt from 'bcrypt';
 
-import { Client } from '../entity/clients';
+import { Client } from './../../models/clients';
 
 @Injectable()
 export class ClientsService {

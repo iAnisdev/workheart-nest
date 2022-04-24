@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { ClientsService } from './clients.service';
 import { ClientsController } from './clients.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Client } from './../entity/clients';
+import { Client } from './../../models/clients';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Client])],

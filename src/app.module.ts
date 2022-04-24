@@ -5,13 +5,13 @@ require('dotenv').config();
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { Client } from './entity/clients';
-import { Project } from './entity/projects';
-import { Task } from './entity/tasks';
-import { ClientsModule } from './clients/clients.module';
-import { ProjectsModule } from './projects/projects.module';
-import { TasksModule } from './tasks/tasks.module';
-import { AuthModule } from './auth/auth.module';
+import { Client } from './models/clients';
+import { Project } from './models/projects';
+import { Task } from './models/tasks';
+import { ClientsModule } from './resources/clients/clients.module';
+import { ProjectsModule } from './resources/projects/projects.module';
+import { TasksModule } from './resources/tasks/tasks.module';
+import { AuthModule } from './resources/auth/auth.module';
 
 @Module({
   imports: [
