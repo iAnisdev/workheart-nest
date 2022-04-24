@@ -4,12 +4,11 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   PrimaryGeneratedColumn,
-  Exclusion,
   BeforeInsert,
+  BeforeUpdate,
 } from 'typeorm';
 
 @Entity('Clients')
-@Exclusion('password')
 export class Client {
   @PrimaryGeneratedColumn()
   id: number;
@@ -25,11 +24,7 @@ export class Client {
   })
   email: string;
 
-  @BeforeInsert()
-  hashPassword() {
-    return this.password;
-  }
-  @Column()
+  @Column({ select: false })
   password: string;
 
   @Column('varchar', { length: 200 })

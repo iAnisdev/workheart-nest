@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { CreateClientDto } from './dto/create-client.dto';
 import { UpdateClientDto } from './dto/update-client.dto';
 import { updateClientPasswordDto } from './dto/update-client-password.dto';
+import * as bcrypt from 'bcrypt';
 
 import { Client } from '../entity/clients';
 
@@ -14,6 +15,7 @@ export class ClientsService {
   ) {}
 
   async create(data: CreateClientDto) {
+    data.password = await bcrypt.hash(data.password, 10);
     const newClient = await this.clientsRepository.create(data);
     await this.clientsRepository.save(data);
     return newClient;
